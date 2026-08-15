@@ -1,0 +1,68 @@
+name: CI
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+      - master
+
+  pull_request:
+
+    branches:
+
+      - main
+
+      - master
+
+jobs:
+
+  quality-checks:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: "3.11"
+
+      - name: Install Poetry
+
+        run: pip install poetry
+
+      - name: Install dependencies
+
+        run: poetry install
+
+      - name: Check formatting with Black
+
+        run: poetry run black --check app tests
+
+      - name: Run Ruff
+
+        run: poetry run ruff check app tests
+
+      - name: Run Pylint
+
+        run: poetry run pylint app
+
+      - name: Run Bandit
+
+        run: poetry run bandit -r app
+
+      - name: Run tests
+
+        run: poetry run pytest
+ 
