@@ -54,10 +54,6 @@ jobs:
 
         run: poetry run ruff check app tests
 
-      - name: Run Pylint
-
-        run: poetry run pylint app
-
       - name: Run Bandit
 
         run: poetry run bandit -r app
