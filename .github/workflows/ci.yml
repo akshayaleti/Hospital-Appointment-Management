@@ -44,7 +44,7 @@ jobs:
 
       - name: Install dependencies
 
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Check formatting with Black
 
